@@ -37,7 +37,7 @@ export default {
         this.success = "Новый клиент успешно создан!";
         setTimeout(() => {
           this.success = "";
-        }, 1000);
+        }, 2000);
       }
     },
 
@@ -79,42 +79,55 @@ export default {
     <div class="form">
       <p>Фамилия</p>
       <input
+        class="input"
         v-model="surname"
         type="text"
         placeholder="Петров"
         @blur="v$.surname.$touch"
         :class="{ wrong: v$.surname.$error }"
       />
+      <div class="v-if-error" v-if="v$.surname.$error">
+        Это поле обязательно к заполнению!
+      </div>
 
       <p>Имя</p>
       <input
+        class="input"
         v-model="name"
         type="text"
         placeholder="Петр"
         @blur="v$.name.$touch"
         :class="{ wrong: v$.name.$error }"
       />
+      <div class="v-if-error" v-if="v$.name.$error">
+        Это поле обязательно к заполнению!
+      </div>
 
       <p>Отчество</p>
-      <input type="text" placeholder="Петрович" />
+      <input class="input" type="text" placeholder="Петрович" />
 
       <p>Дата рождения</p>
       <input
+        class="input"
         v-model="dayOfBirth"
         type="date"
         @blur="v$.dayOfBirth.$touch"
         :class="{ wrong: v$.dayOfBirth.$error }"
       />
+      <div class="v-if-error" v-if="v$.dayOfBirth.$error">
+        Это поле обязательно к заполнению!
+      </div>
 
       <p>Номер телефона</p>
       <input
+        class="input"
         v-model="phoneNumber"
         type="number"
         placeholder="79001234567"
         @blur="v$.phoneNumber.$touch"
         :class="{ wrong: v$.phoneNumber.$error }"
       />
-      <div class="wrong-text" v-if="v$.phoneNumber.$error">
+      <div class="v-if-error" v-if="v$.phoneNumber.$error">
         Проверьте номер телефона! Номер должен начинаться с цифры 7 и иметь
         длинну 11 цифр
       </div>
@@ -137,6 +150,9 @@ export default {
         <option value="problems">Проблемные</option>
         <option value="oms">ОМС</option>
       </select>
+      <div class="v-if-error" v-if="v$.group.$error">
+        Это поле обязательно к заполнению!
+      </div>
 
       <p>Врач</p>
       <select>
@@ -151,28 +167,32 @@ export default {
 
     <div class="form">
       <p>Индекс</p>
-      <input type="number" placeholder="167000" />
+      <input class="input" type="number" placeholder="167000" />
 
       <p>Страна</p>
-      <input type="text" placeholder="Россия" />
+      <input class="input" type="text" placeholder="Россия" />
 
       <p>Область</p>
-      <input type="text" placeholder="Республика Коми" />
+      <input class="input" type="text" placeholder="Республика Коми" />
 
       <p>Город</p>
       <input
+        class="input"
         type="text"
         placeholder="Сыктывкар"
         v-model="city"
         :class="{ wrong: v$.city.$error }"
         @blur="v$.city.$touch"
       />
+      <div class="v-if-error" v-if="v$.city.$error">
+        Это поле обязательно к заполнению!
+      </div>
 
       <p>Улица</p>
-      <input type="text" placeholder="Пушкина" />
+      <input class="input" type="text" placeholder="Пушкина" />
 
       <p>Дом</p>
-      <input type="text" placeholder="1" />
+      <input class="input" type="text" placeholder="1" />
     </div>
 
     <h4>Документ</h4>
@@ -189,23 +209,30 @@ export default {
         <option value="birthdayPaper">Св. о рождении</option>
         <option value="driverLicense">Вод. удостоверение</option>
       </select>
+      <div class="v-if-error" v-if="v$.typeOfDocument.$error">
+        Это поле обязательно к заполнению!
+      </div>
 
       <p>Серия</p>
-      <input type="text" placeholder="1234" />
+      <input class="input" type="text" placeholder="1234" />
 
       <p>Номер</p>
-      <input type="text" placeholder="123456" />
+      <input class="input" type="text" placeholder="123456" />
 
       <p>Кем выдан</p>
-      <input type="text" />
+      <input class="input" type="text" />
 
       <p>Дата выдачи</p>
       <input
+        class="input"
         type="date"
         v-model="dateOfDocument"
         :class="{ wrong: v$.dateOfDocument.$error }"
         @blur="v$.dateOfDocument.$touch"
       />
+      <div class="v-if-error" v-if="v$.dateOfDocument.$error">
+        Это поле обязательно к заполнению!
+      </div>
     </div>
 
     <div class="error-message">{{ success }}</div>
@@ -226,7 +253,7 @@ export default {
   width: 60vw;
   height: max-content;
   margin: auto;
-  background-color: bisque;
+  background-color: #d7b5a1;
   padding: 2vw;
   border-radius: 10px;
 }
@@ -251,27 +278,26 @@ h4 {
   margin-top: 4vh;
   font-family: Arial, Helvetica, sans-serif;
 }
-input {
-  border-radius: 16px;
+.input {
+  border-radius: 12px;
   border: 0;
   height: 7vh;
-  padding-left: 0.3vw;
+  width: 56vw;
+  padding-left: 0.9vw;
   padding-right: 0.3vw;
   font-size: 16px;
 }
 select {
-  border-radius: 16px;
+  border-radius: 12px;
   border: 0;
   height: 7vh;
-  padding-left: 0.3vw;
+  width: 56vw;
+  padding-left: 0.9vw;
   padding-right: 0.3vw;
   font-size: 16px;
 }
 .wrong {
   border: 1px solid red;
-}
-.wrong-text {
-  font-family: Arial, Helvetica, sans-serif;
 }
 .send-button {
   border-radius: 10px;
@@ -281,13 +307,17 @@ select {
   margin-top: 5vh;
   cursor: pointer;
   transition: 0.2s;
+  font-size: 16px;
 }
 .send-button:hover {
-  background-color: rgb(247, 193, 117);
+  background-color: #22b2ea;
+  color: white;
 }
 .error-message {
   margin-top: 2vh;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 .checkbox {
   display: flex;
@@ -299,12 +329,23 @@ select {
 .checkbox input {
   margin-right: 0.5vw;
 }
+.v-if-error {
+  margin-left: 1vw;
+  margin-top: 0.5vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
 @media only screen and (max-width: 600px) {
   .container {
     width: 90vw;
   }
   .send-button {
-    width: 30vw;
+    width: 50vw;
+  }
+  .input {
+    width: 86vw;
+  }
+  select {
+    width: 86vw;
   }
 }
 </style>
